@@ -1,3 +1,3 @@
-module geo-fencing
+module geo-velocity
 
 go 1.12
