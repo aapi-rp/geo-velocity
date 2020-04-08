@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/aapi-rp/geo-velocity/db"
 	"github.com/aapi-rp/geo-velocity/logger"
+	"github.com/aapi-rp/geo-velocity/models"
 	"github.com/aapi-rp/geo-velocity/utils"
 	"log"
 )
@@ -16,7 +17,7 @@ func main() {
 
 	log.Println(geoP.LAT, geoP.LONG, geoP.CITY, geoP.SUBDEVISIONNAME)
 
-	curr := utils.Coord{}
+	curr := models.Coord{}
 
 	curr.Longitude = geoP.LONG
 	curr.Latitude = geoP.LAT
@@ -29,7 +30,7 @@ func main() {
 
 	log.Println(geoC.LAT, geoC.LONG, geoC.CITY, geoC.SUBDEVISIONNAME)
 
-	pre := utils.Coord{}
+	pre := models.Coord{}
 
 	pre.Longitude = geoC.LONG
 	pre.Latitude = geoC.LAT

@@ -3,7 +3,6 @@ package db
 import (
 	"database/sql"
 	"github.com/aapi-rp/geo-velocity/base"
-	"github.com/aapi-rp/geo-velocity/logger"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -34,16 +33,18 @@ func InitData() (*sql.DB, error) {
 	return SqliteConn, nil
 }
 
-func InsertDBRow(query string, values ...interface{}) {
+func InsertDBRow(query string, values ...interface{}) error {
 	insert, err := SqliteConn.Prepare(query)
 
 	if err != nil {
-		logger.Error("Prepare insert event failed: ", err)
+		return err
 	}
 
 	_, err = insert.Exec(values)
 
 	if err != nil {
-		logger.Error("Insert row event failed: ", err)
+		return err
 	}
+
+	return nil
 }

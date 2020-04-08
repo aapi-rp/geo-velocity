@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"github.com/aapi-rp/geo-velocity/models"
 	"github.com/oschwald/geoip2-golang"
 	"log"
 	"math"
@@ -14,28 +15,9 @@ func getCurrentEpochTime() time.Time {
 	return time.Unix(secs, 0)
 }
 
-type Coord struct {
-	Latitude  float64
-	Longitude float64
-}
+func GetGeoDataFromIP(ipaddr string) (models.GeoData, error) {
 
-type GeoData struct {
-	UUID            []byte
-	LOGIN_TIME      int64
-	USERNAME        string
-	IP_ADDRESS      string
-	LAT             float64
-	LONG            float64
-	RADIUS          uint16
-	ISOCountryCode  string
-	TIMEZONE        string
-	SUBDEVISIONNAME string
-	CITY            string
-}
-
-func GetGeoDataFromIP(ipaddr string) (GeoData, error) {
-
-	Geo := GeoData{}
+	Geo := models.GeoData{}
 
 	db, err := geoip2.Open("db/GeoLite2-City.mmdb")
 	if err != nil {
