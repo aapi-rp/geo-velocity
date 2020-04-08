@@ -1,1 +1,5 @@
 package location
+
+func EventData() {
+
+}

@@ -65,7 +65,7 @@ func GetGeoDataFromIP(ipaddr string) (GeoData, error) {
 
 }
 
-// Some of the below methods I got from gist.github.com/cdipaolo and some I wrote myself
+// some of the VariableDistance content I got from gist.github.com/cdipaolo and some I wrote myself
 // The part I wrote myself was the different types of measurement conversions
 // I did this so I could test the method against google for accuracy.
 
@@ -88,19 +88,18 @@ func VariableDistance(lat1, lon1, lat2, lon2 float64, conversiontype string) flo
 	h := hsin(la2-la1) + math.Cos(la1)*math.Cos(la2)*hsin(lo2-lo1)
 	g := 2 * r * math.Asin(math.Sqrt(h))
 
+	// Convert to any unit of measure needed
+
 	if conversiontype == "meters" {
-		log.Println("meters")
 		return g
 	}
 
 	if conversiontype == "miles" {
-		log.Println("miles")
 		c := g / 1609
 		return c
 	}
 
 	if conversiontype == "kilometers" {
-		log.Println("kilometers")
 		c := g / 1000
 		return c
 	}
@@ -118,4 +117,18 @@ func MPH(distance float64, startTime, endTime int64) int {
 	sp := distance / math.Abs(hrs)
 
 	return int(sp)
+}
+
+// This is how i found the answer to the bug issue for proceeding IP access return value in the example.
+// The value in proceedingIPAcess object was the same as the POST to the endpoint.
+// StartTime = (Distance / Speed) - Endtime
+
+func GetEndTimeFromDistanceAndSpeed(distance float64, MPH float64, endTime int64) (float64, time.Time) {
+	travelTime := distance / MPH
+	return travelTime, time.Unix(endTime, 0).Add(-time.Hour * time.Duration(travelTime))
+}
+
+func GetStartTimeFromDistanceAndSpeed(distance float64, MPH float64, startTime int64) (float64, time.Time) {
+	travelTime := distance / MPH
+	return travelTime, time.Unix(startTime, 0).Add(time.Hour * time.Duration(travelTime))
 }

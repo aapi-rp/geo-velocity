@@ -36,8 +36,18 @@ func main() {
 
 	log.Println("Variable Distance: ", vdist)
 
-	mph := utils.MPH(vdist, 1514851200, 1514764800)
+	mph := utils.MPH(vdist, 1514764800, 1514851200)
+
+	endhours, timestamp := utils.GetEndTimeFromDistanceAndSpeed(vdist, float64(mph), 1514851200)
+
+	starthours, timestamp2 := utils.GetStartTimeFromDistanceAndSpeed(vdist, float64(mph), 1514764800)
+
+	log.Println("Hours the trip would take: ", endhours, "hours, and ending timestamp of: ", timestamp.Unix())
+
+	log.Println("Hours the trip would take: ", starthours, "hours and starting timestamp of: ", timestamp2.Unix())
 
 	log.Println("Miles Per Hour: ", mph)
 
 }
+
+// Answer to the bug is 1514678400
