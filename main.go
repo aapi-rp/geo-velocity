@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/aapi-rp/geo-velocity/db"
+	"github.com/aapi-rp/geo-velocity/logger"
 	"github.com/aapi-rp/geo-velocity/utils"
 	"log"
 )
@@ -34,22 +35,21 @@ func main() {
 	pre.Latitude = geoC.LAT
 
 	vdist := utils.VariableDistance(geoP.LAT, geoP.LONG, geoC.LAT, geoC.LONG, "miles")
-
 	log.Println("Variable Distance: ", vdist)
-
 	mph := utils.MPH(vdist, 1514764800, 1514851200)
 
 	endhours, timestamp := utils.GetEndTimeFromDistanceAndSpeed(vdist, float64(mph), 1514851200)
-
 	starthours, timestamp2 := utils.GetStartTimeFromDistanceAndSpeed(vdist, float64(mph), 1514764800)
 
 	log.Println("Hours the trip would take: ", endhours, "hours, and ending timestamp of: ", timestamp.Unix())
-
 	log.Println("Hours the trip would take: ", starthours, "hours and starting timestamp of: ", timestamp2.Unix())
-
 	log.Println("Miles Per Hour: ", mph)
 
-	db.InitData()
+	_, dberr := db.InitData()
+
+	if dberr != nil {
+		logger.Warn("Table already exists error can be ignored: ", dberr)
+	}
 
 }
 
