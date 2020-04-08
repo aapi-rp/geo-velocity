@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/aapi-rp/geo-velocity/db"
 	"github.com/aapi-rp/geo-velocity/utils"
 	"log"
 )
@@ -47,6 +48,8 @@ func main() {
 	log.Println("Hours the trip would take: ", starthours, "hours and starting timestamp of: ", timestamp2.Unix())
 
 	log.Println("Miles Per Hour: ", mph)
+
+	db.InitData()
 
 }
 
