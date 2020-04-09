@@ -63,6 +63,9 @@ func EventData(w http.ResponseWriter, r *http.Request) {
 				w.Write(msg)
 				return
 			}
+
+			// Start forming return JSON, we need previous/subsequent and current
+
 		}
 	}
 }

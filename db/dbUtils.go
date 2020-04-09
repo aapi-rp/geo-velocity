@@ -11,6 +11,7 @@ var SqliteConn *sql.DB
 func InitData() (*sql.DB, error) {
 
 	DbConn, err := sql.Open("sqlite3", base.DBPath())
+	DbConn.SetMaxOpenConns(1)
 	if err != nil {
 		return nil, err
 	}
@@ -37,11 +38,10 @@ func InitData() (*sql.DB, error) {
 func InsertDBRow(query string, values ...interface{}) error {
 
 	DbConn, err := sql.Open("sqlite3", base.DBPath())
+	DbConn.SetMaxOpenConns(1)
 	if err != nil {
 		return err
 	}
-
-	defer DbConn.Close()
 
 	err = DbConn.Ping()
 
@@ -67,10 +67,12 @@ func InsertDBRow(query string, values ...interface{}) error {
 func SelectDBRowExists(query string, args ...interface{}) (bool, error) {
 
 	DbConn, err := sql.Open("sqlite3", base.DBPath())
+	DbConn.SetMaxOpenConns(1)
+
 	if err != nil {
 		return false, err
 	}
-	defer DbConn.Close()
+
 	err = DbConn.Ping()
 
 	if err != nil {
@@ -85,7 +87,7 @@ func SelectDBRowExists(query string, args ...interface{}) (bool, error) {
 		return false, nil
 	}
 
-	defer rows.Close()
+	rows.Close()
 
 	return false, nil
 }

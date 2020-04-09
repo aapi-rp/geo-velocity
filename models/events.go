@@ -22,3 +22,7 @@ func EventUserTimeComboExists(user string, time int64) (bool, error) {
 	userTimeExists, err := db.SelectDBRowExists(db.UserLoginTimeExists, time, user)
 	return userTimeExists, err
 }
+
+func GetPreviousSubsequentCompareJSON(current GeoData) {
+
+}
