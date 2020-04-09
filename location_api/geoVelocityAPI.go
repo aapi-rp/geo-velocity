@@ -5,6 +5,7 @@ import (
 	"github.com/aapi-rp/geo-velocity/logger"
 	"github.com/aapi-rp/geo-velocity/messages"
 	"github.com/aapi-rp/geo-velocity/models"
+	"github.com/aapi-rp/geo-velocity/security"
 	"github.com/aapi-rp/geo-velocity/utils"
 	"io/ioutil"
 	"log"
@@ -16,7 +17,7 @@ func EventData(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		logger.Error("Error getting request body: ", err)
 		msg, _ := messages.CreateJsonMssage(messages.Err400Message, "400")
-		w.WriteHeader(500)
+		w.WriteHeader(400)
 		w.Write(msg)
 		return
 	}
@@ -24,9 +25,9 @@ func EventData(w http.ResponseWriter, r *http.Request) {
 	var er models.BaseEventRequest
 	err = json.Unmarshal(body, &er)
 	if err != nil {
-		logger.Error("Error Unmarshaling json into struct: ", err)
+		logger.Error("Error getting request body: ", err)
 		msg, _ := messages.CreateJsonMssage(messages.Err400Message, "400")
-		w.WriteHeader(500)
+		w.WriteHeader(400)
 		w.Write(msg)
 		return
 	}
@@ -35,6 +36,17 @@ func EventData(w http.ResponseWriter, r *http.Request) {
 
 	geo.USERNAME = er.Username
 	geo.LOGIN_TIME = er.UnixTimestamp
-	geo.IP_ADDRESS = er.IPAddress
+	geo.IP_ADDRESS = security.Encrypt(er.IPAddress)
+	geo.UUID = []byte(er.EventUUID)
+
+	err = models.AddEvents(geo)
+
+	if err != nil {
+		logger.Error("DB insert event failed: ", err)
+		msg, _ := messages.CreateJsonMssage(messages.Err500Message, "500")
+		w.WriteHeader(500)
+		w.Write(msg)
+		return
+	}
 
 }

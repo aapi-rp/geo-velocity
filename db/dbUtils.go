@@ -10,14 +10,12 @@ var SqliteConn *sql.DB
 
 func InitData() (*sql.DB, error) {
 
-	dbpath := base.DBPath()
-
-	SqliteConn, err := sql.Open("sqlite3", dbpath)
+	DbConn, err := sql.Open("sqlite3", base.DBPath())
 	if err != nil {
 		return nil, err
 	}
 
-	ct, err := SqliteConn.Prepare(createGVTable)
+	ct, err := DbConn.Prepare(createGVTable)
 
 	if err != nil {
 		return nil, err
@@ -25,22 +23,37 @@ func InitData() (*sql.DB, error) {
 
 	ct.Exec()
 
-	err = SqliteConn.Ping()
+	err = DbConn.Ping()
 
 	if err != nil {
 		return nil, err
 	}
-	return SqliteConn, nil
+
+	SqliteConn = DbConn
+
+	return DbConn, nil
 }
 
 func InsertDBRow(query string, values ...interface{}) error {
-	insert, err := SqliteConn.Prepare(query)
+
+	DbConn, err := sql.Open("sqlite3", base.DBPath())
+	if err != nil {
+		return err
+	}
+
+	err = DbConn.Ping()
 
 	if err != nil {
 		return err
 	}
 
-	_, err = insert.Exec(values)
+	insert, err := DbConn.Prepare(query)
+
+	if err != nil {
+		return err
+	}
+
+	_, err = insert.Exec(values...)
 
 	if err != nil {
 		return err

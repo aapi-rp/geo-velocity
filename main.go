@@ -66,7 +66,7 @@ func main() {
 	_, dberr := db.InitData()
 
 	if dberr != nil {
-		logger.Warn("If table already exists warning can most likely be ignored: ", dberr)
+		logger.Warn("If table already exists, this warning can most likely be ignored: ", dberr)
 	}
 
 	if strings.ToLower(base.SkipSSLVerify()) == "true" {
