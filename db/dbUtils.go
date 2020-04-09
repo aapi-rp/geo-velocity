@@ -92,33 +92,20 @@ func SelectDBRowExists(query string, args ...interface{}) (bool, error) {
 	return false, nil
 }
 
-//func SelectDBRows(query string, dest ...interface{}) (error) {
-//
-//
-//	DbConn, err := sql.Open("sqlite3", base.DBPath())
-//	if err != nil {
-//		return nil, err
-//	}
-//	defer DbConn.Close()
-//	err = DbConn.Ping()
-//
-//	if err != nil {
-//		return nil, err
-//	}
-//
-//
-//	rows, err := DbConn.Query(query)
-//	if err != nil {
-//		return nil, err
-//	}
-//
-//
-//	for rows.Next() {
-//		err = rows.Scan(dest...)
-//		if err != nil {
-//			return nil, err
-//		}
-//	}
-//
-//	rows.Close() //good habit to close
-//}
+func SelectDBRows(query string) (*sql.Rows, error) {
+
+	DbConn, err := sql.Open("sqlite3", base.DBPath())
+	if err != nil {
+		return nil, err
+	}
+	defer DbConn.Close()
+	err = DbConn.Ping()
+
+	if err != nil {
+		return nil, err
+	}
+
+	rows, err := DbConn.Query(query)
+
+	return rows, err
+}

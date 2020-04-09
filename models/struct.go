@@ -13,6 +13,7 @@ type WebMessage struct {
 type GeoData struct {
 	UUID            []byte
 	LOGIN_TIME      int64
+	MPH             int
 	USERNAME        string
 	IP_ADDRESS      string
 	LAT             float64
@@ -35,13 +36,13 @@ type VelocityJSON struct {
 	CurrentGeo struct {
 		Lat    float64 `json:"lat,omitempty"`
 		Lon    float64 `json:"lon,omitempty"`
-		Radius int64   `json:"radius,omitempty"`
+		Radius uint16  `json:"radius,omitempty"`
 	} `json:"currentGeo,omitempty"`
 	PrecedingIPAccess struct {
 		IP        string  `json:"ip,omitempty"`
 		Lat       float64 `json:"lat,omitempty"`
 		Lon       float64 `json:"lon,omitempty"`
-		Radius    int64   `json:"radius,omitempty"`
+		Radius    uint16  `json:"radius,omitempty"`
 		Speed     int64   `json:"speed,omitempty"`
 		Timestamp int64   `json:"timestamp,omitempty"`
 	} `json:"precedingIpAccess,omitempty"`
@@ -49,7 +50,7 @@ type VelocityJSON struct {
 		IP        string  `json:"ip,omitempty"`
 		Lat       float64 `json:"lat,omitempty"`
 		Lon       float64 `json:"lon,omitempty"`
-		Radius    int64   `json:"radius,omitempty"`
+		Radius    uint16  `json:"radius,omitempty"`
 		Speed     int64   `json:"speed,omitempty"`
 		Timestamp int64   `json:"timestamp,omitempty"`
 	} `json:"subsequentIpAccess,omitempty"`
