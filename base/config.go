@@ -3,8 +3,11 @@ package base
 import "os"
 
 const env = "development"
-const dbpath = "/Users/rphillips/Documents/github.com/aapi-rp/geo-velocity/db/geo-velocity.sqlite3"
+const dbpath = "db/geo-velocity.sqlite3"
 const encKey = "0E&@w85hetEO7rl2"
+const sslEnable = "false"
+const serverPort = "8080"
+const skipSSLVerify = "false"
 
 func GetEnv() string {
 	val := os.Getenv("env")
@@ -33,6 +36,37 @@ func EncKey() string {
 
 	if val == "" {
 		val = encKey
+	}
+
+	return val
+}
+
+func EnableSSL() string {
+	val := os.Getenv("enable_ssl")
+
+	if val == "" {
+		val = sslEnable
+	}
+
+	return val
+}
+
+func ServerPort() string {
+	val := os.Getenv("server_port")
+
+	if val == "" {
+		val = serverPort
+	}
+
+	return val
+}
+
+// Do not do this in production
+func SkipSSLVerify() string {
+	val := os.Getenv("skip_ssl_verify")
+
+	if val == "" {
+		val = skipSSLVerify
 	}
 
 	return val
