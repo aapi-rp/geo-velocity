@@ -64,7 +64,14 @@ func EventData(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			// Start forming return JSON, we need previous/subsequent and current
+			returnGeoData := models.GetPreviousSubsequentCompareJSON(geo)
+			returnJson, err := json.Marshal(returnGeoData)
+			if err != nil {
+				logger.Error("Could not marshal struct data for velocity: ", err)
+			}
+
+			w.WriteHeader(200)
+			w.Write(returnJson)
 
 		}
 	}
