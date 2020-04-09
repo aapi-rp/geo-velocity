@@ -1,5 +1,0 @@
-package location
-
-func EventData() {
-
-}

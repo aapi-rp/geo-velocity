@@ -5,6 +5,11 @@ type Coord struct {
 	Longitude float64
 }
 
+type WebMessage struct {
+	Message string `json:"message"`
+	Status  string `json:"status"`
+}
+
 type GeoData struct {
 	UUID            []byte
 	LOGIN_TIME      int64
@@ -17,4 +22,11 @@ type GeoData struct {
 	TIMEZONE        string
 	SUBDEVISIONNAME string
 	CITY            string
+}
+
+type BaseEventRequest struct {
+	EventUUID     string `json:"event_uuid"`
+	IPAddress     string `json:"ip_address"`
+	UnixTimestamp int64  `json:"unix_timestamp"`
+	Username      string `json:"username"`
 }

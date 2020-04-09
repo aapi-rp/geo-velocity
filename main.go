@@ -5,6 +5,7 @@ import (
 	"github.com/aapi-rp/geo-velocity/logger"
 	"github.com/aapi-rp/geo-velocity/models"
 	"github.com/aapi-rp/geo-velocity/utils"
+	"github.com/google/uuid"
 	"log"
 )
 
@@ -21,6 +22,14 @@ func main() {
 
 	curr.Longitude = geoP.LONG
 	curr.Latitude = geoP.LAT
+
+	tuuid := uuid.Must(uuid.NewRandom())
+
+	geoP.UUID = []byte(tuuid.String())
+
+	logger.Warn(string(geoP.UUID))
+
+	//models.AddEvents(geoP)
 
 	geoC, err := utils.GetGeoDataFromIP("206.81.252.6")
 
