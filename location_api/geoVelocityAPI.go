@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/aapi-rp/geo-velocity/logger"
 	"github.com/aapi-rp/geo-velocity/messages"
+	"github.com/aapi-rp/geo-velocity/model_struct"
 	"github.com/aapi-rp/geo-velocity/models"
 	"github.com/aapi-rp/geo-velocity/security"
 	"github.com/aapi-rp/geo-velocity/utils"
@@ -21,7 +22,7 @@ func EventData(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var er models.BaseEventRequest
+	var er model_struct.BaseEventRequest
 	err = json.Unmarshal(body, &er)
 	if err != nil {
 		logger.Error("Error getting request body: ", err)

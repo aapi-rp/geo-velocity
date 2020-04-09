@@ -1,4 +1,4 @@
-package models
+package model_struct
 
 type Coord struct {
 	Latitude  float64

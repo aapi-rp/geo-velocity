@@ -3,10 +3,11 @@ package models
 import (
 	"github.com/aapi-rp/geo-velocity/db"
 	"github.com/aapi-rp/geo-velocity/logger"
+	"github.com/aapi-rp/geo-velocity/model_struct"
 	"github.com/aapi-rp/geo-velocity/utils"
 )
 
-func AddEvents(geo GeoData) error {
+func AddEvents(geo model_struct.GeoData) error {
 	err := db.InsertDBRow(db.InsertGVTable, geo.UUID, geo.LOGIN_TIME, geo.USERNAME, geo.IP_ADDRESS, geo.LAT, geo.LONG, geo.RADIUS)
 	if err != nil {
 		return err
@@ -25,13 +26,13 @@ func EventUserTimeComboExists(user string, time int64) (bool, error) {
 	return userTimeExists, err
 }
 
-func GetPreviousSubsequentCompareJSON(current GeoData) VelocityJSON {
+func GetPreviousSubsequentCompareJSON(current model_struct.GeoData) model_struct.VelocityJSON {
 
 	hasPrevious := false
 	hasSubsequent := false
-	velocity := VelocityJSON{}
+	velocity := model_struct.VelocityJSON{}
 
-	prevGeoData := GeoData{}
+	prevGeoData := model_struct.GeoData{}
 
 	prevRows, err := db.SelectDBRows(db.GetPrevious)
 
@@ -66,7 +67,7 @@ func GetPreviousSubsequentCompareJSON(current GeoData) VelocityJSON {
 		}
 	}
 
-	subGeoData := GeoData{}
+	subGeoData := model_struct.GeoData{}
 
 	subRows, err := db.SelectDBRows(db.GetSubsequent)
 
