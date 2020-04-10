@@ -93,12 +93,10 @@ func MPH(distance float64, startTime, endTime int64) int {
 
 	st := time.Unix(startTime, 0)
 	et := time.Unix(endTime, 0)
-	// Get difference in times in hours from the time stamps above
 	hrs := et.Sub(st).Hours()
-	// Divide distance by absolute value of hours
-	sp := distance / math.Abs(hrs)
+	mph := distance / math.Abs(hrs)
 
-	return int(sp)
+	return int(mph)
 }
 
 // This is how i found the answer to the bug issue for proceeding IP access return value in the example.

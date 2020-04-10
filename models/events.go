@@ -31,7 +31,7 @@ func GetPreviousSubsequentCompareJSON(current model_struct.GeoData) model_struct
 
 	velocity := model_struct.VelocityJSON{}
 
-	prevGeoData, hasPrevious, err := db.SelectDBRows(db.GetPrevious, current.IP_ADDRESS, current.USERNAME, current.LOGIN_TIME)
+	prevGeoData, hasPrevious, err := db.SelectDBRows(db.GetPrevious, current.IP_ADDRESS, current.USERNAME, current.LOGIN_TIME, current.USERNAME)
 
 	if err != nil {
 		logger.Error("Previous rows query has an issue for: ", current.IP_ADDRESS, current.USERNAME, current.LOGIN_TIME)
@@ -45,6 +45,7 @@ func GetPreviousSubsequentCompareJSON(current model_struct.GeoData) model_struct
 		velocity.PrecedingIPAccess.Lat = prevGeoData.LAT
 		velocity.PrecedingIPAccess.Lon = prevGeoData.LONG
 		velocity.PrecedingIPAccess.Radius = prevGeoData.RADIUS
+		velocity.PrecedingIPAccess.Timestamp = prevGeoData.LOGIN_TIME
 		velocity.PrecedingIPAccess.Speed = int64(mph)
 
 		if mph > 500 {
@@ -54,7 +55,7 @@ func GetPreviousSubsequentCompareJSON(current model_struct.GeoData) model_struct
 		}
 	}
 
-	subGeoData, hasSubsequent, err := db.SelectDBRows(db.GetSubsequent, current.IP_ADDRESS, current.USERNAME, current.LOGIN_TIME)
+	subGeoData, hasSubsequent, err := db.SelectDBRows(db.GetSubsequent, current.IP_ADDRESS, current.USERNAME, current.LOGIN_TIME, current.USERNAME)
 
 	if err != nil {
 		logger.Error("Subsequent rows query has an issue for: ", current.IP_ADDRESS, current.USERNAME, current.LOGIN_TIME)
@@ -68,6 +69,7 @@ func GetPreviousSubsequentCompareJSON(current model_struct.GeoData) model_struct
 		velocity.SubsequentIPAccess.Lat = subGeoData.LAT
 		velocity.SubsequentIPAccess.Lon = subGeoData.LONG
 		velocity.SubsequentIPAccess.Radius = subGeoData.RADIUS
+		velocity.SubsequentIPAccess.Timestamp = subGeoData.LOGIN_TIME
 		velocity.SubsequentIPAccess.Speed = int64(mph)
 
 		if mph > 500 {

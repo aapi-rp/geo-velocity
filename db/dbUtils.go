@@ -97,7 +97,7 @@ func SelectDBRowExists(query string, args ...interface{}) (bool, error) {
 func SelectDBRows(query string, currentIPAddr string, currentUser string, args ...interface{}) (model_struct.GeoData, bool, error) {
 
 	subGeoData := model_struct.GeoData{}
-
+	hasrows := false
 	DbConn, err := sql.Open("sqlite3", base.DBPath())
 	DbConn.SetMaxOpenConns(1)
 
@@ -119,11 +119,11 @@ func SelectDBRows(query string, currentIPAddr string, currentUser string, args .
 			logger.Error("Something happened while scanning the rows for: ", currentIPAddr, currentUser, " for query: ", query)
 			return subGeoData, false, err
 		}
-
+		hasrows = true
 	}
 
 	subRows.Close()
 
-	return subGeoData, true, nil
+	return subGeoData, hasrows, nil
 
 }

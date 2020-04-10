@@ -67,6 +67,5 @@ func main() {
 		}
 		log.Fatal(srv.ListenAndServe())
 	}
-}
 
-// Answer to the bug is 1514678400
+}
