@@ -3,6 +3,8 @@ package db
 import (
 	"database/sql"
 	"github.com/aapi-rp/geo-velocity/base"
+	"github.com/aapi-rp/geo-velocity/logger"
+	"github.com/aapi-rp/geo-velocity/model_struct"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -92,20 +94,36 @@ func SelectDBRowExists(query string, args ...interface{}) (bool, error) {
 	return false, nil
 }
 
-func SelectDBRows(query string) (*sql.Rows, error) {
+func SelectDBRows(query string, currentIPAddr string, currentUser string, args ...interface{}) (model_struct.GeoData, bool, error) {
+
+	subGeoData := model_struct.GeoData{}
 
 	DbConn, err := sql.Open("sqlite3", base.DBPath())
+	DbConn.SetMaxOpenConns(1)
+
 	if err != nil {
-		return nil, err
+		return subGeoData, false, err
 	}
-	defer DbConn.Close()
+
 	err = DbConn.Ping()
 
 	if err != nil {
-		return nil, err
+		return subGeoData, false, err
 	}
 
-	rows, err := DbConn.Query(query)
+	subRows, err := DbConn.Query(query, args...)
 
-	return rows, err
+	for subRows.Next() {
+		err = subRows.Scan(&subGeoData.IP_ADDRESS, &subGeoData.LAT, &subGeoData.LONG, &subGeoData.RADIUS, &subGeoData.LOGIN_TIME)
+		if err != nil {
+			logger.Error("Something happened while scanning the rows for: ", currentIPAddr, currentUser, " for query: ", query)
+			return subGeoData, false, err
+		}
+
+	}
+
+	subRows.Close()
+
+	return subGeoData, true, nil
+
 }

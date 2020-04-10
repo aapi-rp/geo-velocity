@@ -6,19 +6,17 @@ import (
 	"crypto/cipher"
 	"encoding/base64"
 	"fmt"
-	"github.com/aapi-rp/geo-velocity/base"
-	"github.com/aapi-rp/geo-velocity/logger"
 	"io"
-	"net/http"
+	"log"
 )
 
 func Encrypt(text string) string {
-	key := []byte(base.EncKey())
+	key := []byte("0E&@w85hetEO7ry6")
 	plaintext := []byte(text)
 
 	block, err := aes.NewCipher(key)
 	if err != nil {
-		logger.Error(err)
+		log.Println(err)
 	}
 
 	// The IV needs to be unique, but not secure. Therefore it's common to
@@ -30,7 +28,7 @@ func Encrypt(text string) string {
 	iv := ciphertext[:aes.BlockSize]
 	if _, err := io.ReadFull(r, iv); err != nil {
 		//panic(err)
-		logger.Error(err)
+		log.Println(err)
 	}
 
 	stream := cipher.NewCFBEncrypter(block, iv)
@@ -45,14 +43,14 @@ func Decrypt(cryptoText string) (string, bool) {
 	key := []byte("0E&@w85hetEO7ry6")
 	block, err := aes.NewCipher(key)
 	if err != nil {
-		logger.Error(err)
+		log.Println(err)
 		return "", false
 	}
 
 	// The IV needs to be unique, but not secure. Therefore it's common to
 	// include it at the beginning of the ciphertext.
 	if len(ciphertext) < aes.BlockSize {
-		logger.Debug("ciphertext too short")
+		log.Println("ciphertext too short")
 		return "", false
 	}
 	iv := ciphertext[:aes.BlockSize]
@@ -64,14 +62,4 @@ func Decrypt(cryptoText string) (string, bool) {
 	stream.XORKeyStream(ciphertext, ciphertext)
 
 	return fmt.Sprintf("%s", ciphertext), true
-}
-
-//ReadCookie read the cookie
-func ReadCookie(r *http.Request, name string) string {
-	c, err := r.Cookie(name)
-	if err != nil {
-		logger.Error("error in reading cookie : ", err.Error())
-		return ""
-	}
-	return c.Value
 }

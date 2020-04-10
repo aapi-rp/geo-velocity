@@ -54,6 +54,6 @@ type VelocityJSON struct {
 		Speed     int64   `json:"speed,omitempty"`
 		Timestamp int64   `json:"timestamp,omitempty"`
 	} `json:"subsequentIpAccess,omitempty"`
-	TravelFromCurrentGeoSuspicious bool `json:"travelFromCurrentGeoSuspicious,omitempty"`
-	TravelToCurrentGeoSuspicious   bool `json:"travelToCurrentGeoSuspicious,omitempty"`
+	TravelFromCurrentGeoSuspicious bool `json:"travelFromCurrentGeoSuspicious"`
+	TravelToCurrentGeoSuspicious   bool `json:"travelToCurrentGeoSuspicious"`
 }
