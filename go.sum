@@ -1,3 +1,5 @@
+github.com/aapi-rp/geo-velocity v0.0.0-20200410195912-88e246dd6a12 h1:LKC2G3JdjFMIZhJwCuuF2ht9N2fr5w0E7ut+ZTWkt8M=
+github.com/aapi-rp/geo-velocity v0.0.0-20200410195912-88e246dd6a12/go.mod h1:/v73/z7OhPq+zcHAYzZHf0XqiDs+/eR+gnkVk/xuyP0=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/gorilla/mux v1.7.4 h1:VuZ8uybHlWmqV03+zRzdwKL4tUnIp1MAQtp1mIFE1bc=
