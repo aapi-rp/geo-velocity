@@ -46,7 +46,7 @@ func main() {
 		},
 	}
 
-	logger.Log("Starting Web Server")
+	logger.Log("Starting Web Server over port: ", base.ServerPort())
 
 	if strings.ToLower(base.EnableSSL()) == "true" {
 		srv := &http.Server{
