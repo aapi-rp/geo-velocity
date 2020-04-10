@@ -4,10 +4,12 @@ import "os"
 
 const env = "development"
 const dbpath = "db/geo-velocity.sqlite3"
-const encKey = "0E&@w85hetEO7rl2"
+const encIV = "28472B4B6250655368566D597133743677397A24432646294A404D635166546A"
+const encKey256 = "703273357638792F423F4528472B4B6250655368566D597133743677397A2443"
 const sslEnable = "false"
 const serverPort = "8080"
 const skipSSLVerify = "false"
+const host = "localhost"
 
 func GetEnv() string {
 	val := os.Getenv("env")
@@ -31,11 +33,21 @@ func DBPath() string {
 
 // This should be added as a Kubernetes secret key header so its protected.
 // Default should not be used in production
-func EncKey() string {
+func EncKey256() string {
 	val := os.Getenv("encryption_key")
 
 	if val == "" {
-		val = encKey
+		val = encKey256
+	}
+
+	return val
+}
+
+func EncIV() string {
+	val := os.Getenv("encryption_iv")
+
+	if val == "" {
+		val = encIV
 	}
 
 	return val

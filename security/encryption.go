@@ -5,52 +5,53 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"encoding/base64"
+	"encoding/hex"
 	"fmt"
+	"github.com/aapi-rp/geo-velocity/base"
+	"github.com/aapi-rp/geo-velocity/logger"
 	"io"
 	"log"
 )
 
+// Long ago I used multiple sources to put these encryption and decryption methods together.
+// Stack overflow mostly https://stackoverflow.com/questions/18817336/golang-encrypting-a-string-with-aes-and-base64
+// https://golang.org/pkg/crypto/ is another site i looked at for understanding
+
 func Encrypt(text string) string {
-	key := []byte("0E&@w85hetEO7ry6")
+	key, _ := hex.DecodeString(base.EncKey256())
 	plaintext := []byte(text)
 
 	block, err := aes.NewCipher(key)
 	if err != nil {
-		log.Println(err)
+		logger.Error("Error generating block: ", err)
 	}
 
-	// The IV needs to be unique, but not secure. Therefore it's common to
-	// include it at the beginning of the ciphertext.
-	byteData := []byte("0E&@w85hetEO7ry6")
+	byteData := []byte(base.EncIV())
 	var r io.Reader
 	r = bytes.NewReader(byteData)
 	ciphertext := make([]byte, aes.BlockSize+len(plaintext))
 	iv := ciphertext[:aes.BlockSize]
 	if _, err := io.ReadFull(r, iv); err != nil {
-		//panic(err)
-		log.Println(err)
+		logger.Error("Error adding iv: ", err)
 	}
 
 	stream := cipher.NewCFBEncrypter(block, iv)
 	stream.XORKeyStream(ciphertext[aes.BlockSize:], plaintext)
 
-	// convert to base64
 	return base64.URLEncoding.EncodeToString(ciphertext)
 }
 
 func Decrypt(cryptoText string) (string, bool) {
 	ciphertext, _ := base64.URLEncoding.DecodeString(cryptoText)
-	key := []byte("0E&@w85hetEO7ry6")
+	key, _ := hex.DecodeString(base.EncKey256())
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		log.Println(err)
 		return "", false
 	}
 
-	// The IV needs to be unique, but not secure. Therefore it's common to
-	// include it at the beginning of the ciphertext.
 	if len(ciphertext) < aes.BlockSize {
-		log.Println("ciphertext too short")
+		logger.Error("Improper cipher text size.")
 		return "", false
 	}
 	iv := ciphertext[:aes.BlockSize]
@@ -58,7 +59,6 @@ func Decrypt(cryptoText string) (string, bool) {
 
 	stream := cipher.NewCFBDecrypter(block, iv)
 
-	// XORKeyStream can work in-place if the two arguments are the same.
 	stream.XORKeyStream(ciphertext, ciphertext)
 
 	return fmt.Sprintf("%s", ciphertext), true

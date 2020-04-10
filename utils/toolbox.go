@@ -15,6 +15,10 @@ func getCurrentEpochTime() time.Time {
 	return time.Unix(secs, 0)
 }
 
+func GetAPIHost() {
+
+}
+
 func GetGeoDataFromIP(ipaddr string) (model_struct.GeoData, error) {
 
 	Geo := model_struct.GeoData{}
