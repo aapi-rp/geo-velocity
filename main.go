@@ -46,6 +46,8 @@ func main() {
 		},
 	}
 
+	logger.Log("Starting Web Server")
+
 	if strings.ToLower(base.EnableSSL()) == "true" {
 		srv := &http.Server{
 			Addr:         ":" + base.ServerPort(),
@@ -56,6 +58,7 @@ func main() {
 			TLSConfig:    cfg,
 			TLSNextProto: make(map[string]func(*http.Server, *tls.Conn, http.Handler), 0),
 		}
+		logger.Log("Running..")
 		log.Fatal(srv.ListenAndServeTLS("cert.pem", "key.pem"))
 	} else {
 		srv := &http.Server{
@@ -65,6 +68,7 @@ func main() {
 			WriteTimeout: writeTimeout,
 			IdleTimeout:  idleTimeout,
 		}
+		logger.Log("Running..")
 		log.Fatal(srv.ListenAndServe())
 	}
 
