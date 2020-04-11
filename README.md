@@ -3,6 +3,7 @@
 ##### Detailed Documentation
 - [Geo Velocity Home](https://github.com/aapi-rp/geo-velocity/wiki "Geo Velocity Home")
 - [Requirements Abstract](https://github.com/aapi-rp/geo-velocity/wiki/Requirements_Abstract "Requirements Abstract")
+- [Geo API Document](https://github.com/aapi-rp/geo-velocity/wiki/API-Docs)
 
 What is geo Velocity?
 
