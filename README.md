@@ -16,7 +16,8 @@ To provide an API that calculates geo events based on IP Address origin, and can
 ## Docker
 #### Pull docker from dockerhub
 ```
-docker pull aapirp/geo-velocity:v1.1.5
+$ docker pull aapirp/geo-velocity:v1.1.5
+$ docker run --publish 8081:8081 -e server_port=8081 --name geo aapirp/geo-velocity:v1.1.5
 ```
 
 #### Environment Variables
