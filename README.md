@@ -48,3 +48,59 @@ run the following:
 $ git clone https://github.com/aapi-rp/geo-velocity.git
 $ cd to /yourbase/github.com/aapi-rp
 ```
+
+
+##Geo Velocity API
+
+#### MIME Type
+```
+application/json
+```
+
+#### Request Parameters
+
+| Name           | Example                              | Type | Required | Data Type |
+|----------------|--------------------------------------|------|----------|-----------|
+| username       | jim                                  | Form | yes      | string    |
+| unix_timestamp | 1586477927                           | Form | yes      | number    |
+| event_uuid     | 85ad929a-db03-4bf4-9541-8f728fa12e98 | Form | yes      | string    |
+| ip_address     | 65.49.22.66                          | Form | yes      | striing   |
+
+
+#### Example Request:
+
+```
+$ curl -X POST -d '{"username": "jim",
+"unix_timestamp": 1586477927,
+"event_uuid": "85ad929a-db03-4bf4-9541-8f728fa12e98", "ip_address": "65.49.22.66"}' http://localhost:8080/v1/geovelocity
+```
+
+#### Example Response:
+
+```
+{
+  "currentGeo": {
+    "lat": 33.491,
+    "lon": -112.2491,
+    "radius": 10
+  },
+  "precedingIpAccess": {
+    "ip": "35.208.83.97",
+    "lat": 37.751,
+    "lon": -97.822,
+    "radius": 1000,
+    "speed": 79,
+    "timestamp": 1586438757
+  },
+  "subsequentIpAccess": {
+    "ip": "78.31.205.251",
+    "lat": 40.7308,
+    "lon": -73.9975,
+    "radius": 1000,
+    "speed": 163,
+    "timestamp": 1586525157
+  },
+  "travelFromCurrentGeoSuspicious": false,
+  "travelToCurrentGeoSuspicious": false
+}
+```
