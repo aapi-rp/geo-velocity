@@ -83,6 +83,9 @@ $ curl -X POST -d '{"username": "jim",
 
 #### Example Response:
 
+
+Status: <span style="color:green">200 ok</span>
+
 ```
 {
   "currentGeo": {
@@ -110,3 +113,46 @@ $ curl -X POST -d '{"username": "jim",
   "travelToCurrentGeoSuspicious": false
 }
 ```
+
+Status: <span style="color:red">400 Bad Request</span>
+
+
+This error is farily clear, its when a UniqueID exists and someone trys to use it again.
+```
+{
+  "message": "Error, UUID Exists",
+  "status": "400"
+}
+```
+This happens because a specific user has the submitted unix timestamp already.
+```
+{
+  "message": "Error, User event already exists with that timestamp",
+  "status": "400"
+}
+```
+This happens when you are sending bad json.
+```
+{
+  "message": "Error, Malformed Request",
+  "status": "400"
+}
+```
+
+Status: <span style="color:red">500 Internal Server Error</span>
+
+This happens because you are missing the mime type application/json in your Content-Type header.
+```
+{
+  "message": "Error, your request should be adjusted to add Content-Type header with mime application/json",
+  "status": "500"
+}
+```
+This is just bad stuff happening on our side that one of our devs messed up.  Forgive them they are great people... seriously.
+```
+{
+  "message": "Error, Something went wrong with your request, please contact your administrator.",
+  "status": "500"
+}
+```
+
