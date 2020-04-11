@@ -6,4 +6,42 @@ Geo velocity is The process in which an IP address is captured by standard progr
 
 What is the purpose of this project?
 
-To provide an API that calculates geo events based on IP Address origin, and can decypher if the traffic is suspicious or valid, and return decyphered results to any application that needs to protect against malicious attacks based on geographic location, time and speed.
+To provide an API that calculates geo events based on IP Address origin, and can decipher if the traffic is suspicious or valid, and return deciphered results to any application that needs to protect against malicious attacks based on geographic location, time and speed.
+
+##Docker
+#### Pull docker from dockerhub
+```
+docker pull aapirp/geo-velocity:tagname
+```
+
+#### Environment Variables
+
+All settings below during testing are defaulted and do not need to be changed unless using in production mode. Keys should be added as kubernetes secrets in the GCP interface for security. [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/ "Kubernetes Secrets")
+
+Terminal Command to add env variables:
+```
+$ export sqlite3_db_path=data/geo-velocity.sqlite3
+$ export env=development | production
+$ export encryption_key=256 hex key
+$ export encryption_iv=256 hex iv
+$ export enable_ssl=true
+$ export server_port=8080
+$ export skip_ssl_verify
+```
+
+####Build your own docker
+
+run the following:
+```
+$ git clone https://github.com/aapi-rp/geo-velocity.git
+$ cd to /yourbase/github.com/aapi-rp
+$ docker build geo-velocity
+```
+
+##Install from source
+run the following:
+```
+$ git clone https://github.com/aapi-rp/geo-velocity.git
+$ cd to /yourbase/github.com/aapi-rp
+```
+
