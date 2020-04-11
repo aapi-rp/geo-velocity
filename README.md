@@ -16,7 +16,7 @@ To provide an API that calculates geo events based on IP Address origin, and can
 ## Docker
 #### Pull docker from dockerhub
 ```
-docker pull aapirp/geo-velocity:tagname
+docker pull aapirp/geo-velocity:v1.1.5
 ```
 
 #### Environment Variables
