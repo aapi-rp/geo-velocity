@@ -50,7 +50,7 @@ $ cd to /yourbase/github.com/aapi-rp
 ```
 
 
-##Geo Velocity API
+## Geo Velocity API
 
 #### MIME Type
 ```
