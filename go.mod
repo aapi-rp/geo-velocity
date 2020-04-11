@@ -1,4 +1,4 @@
-module github.com/aapi-rp/geo-velocity@latest
+module github.com/aapi-rp/geo-velocity
 
 go 1.12
 
