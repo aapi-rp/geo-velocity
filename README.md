@@ -1,5 +1,9 @@
 # Geo Velocity
 
+##### Detailed Documentation
+- [Geo Velocity Home](https://github.com/aapi-rp/geo-velocity/wiki "Geo Velocity Home")
+- [Requirements Abstract](https://github.com/aapi-rp/geo-velocity/wiki/Requirements_Abstract "Requirements Abstract")
+
 What is geo Velocity?
 
 Geo velocity is The process in which an IP address is captured by standard programmatic means, and that IP address is analyzed for its relevant geo location, more specifically, the origin of the IP addresses longitude and latitude. When the IP address is captured, the time in which it was captured is also collected in some type of storage table for later comparison. If you have 2 different geo access points (2 different geographic locations) captured in this data storage table, you can then compare the times of access, and the distance between the access points to get the Miles Per Hour or Kilometers Per Hour it would take to get from one of the geographic locations to the other. With the speed of travel defined, you can tell if the travel between the locations would be feasible, if its not feasible, then you can alert someone via email, or simply programmatically block the access.
@@ -44,4 +48,3 @@ run the following:
 $ git clone https://github.com/aapi-rp/geo-velocity.git
 $ cd to /yourbase/github.com/aapi-rp
 ```
-
