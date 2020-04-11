@@ -54,9 +54,13 @@ $ cd to /yourbase/github.com/aapi-rp
 ## Geo Velocity API
 
 #### MIME Type
-```
+`
 application/json
-```
+`
+#### Request Type
+`
+POST
+`
 
 #### Request Parameters
 
