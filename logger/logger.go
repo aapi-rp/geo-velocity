@@ -2,7 +2,7 @@ package logger
 
 import (
 	"fmt"
-	base "github.com/aapi-rp/geo-velocity/config"
+	"github.com/aapi-rp/geo-velocity/config"
 	"os"
 	"sync"
 )
@@ -78,7 +78,7 @@ func (t *Logger) Log(v ...interface{}) {
 	t.mu.Lock()
 	defer t.mu.Unlock()
 
-	if t.Level < LevelInfo || base.GetEnv() == "production" {
+	if t.Level < LevelInfo || config.GetEnv() == "production" {
 		return
 	}
 	t.log(LevelInfo, true, v...)
@@ -89,7 +89,7 @@ func (t *Logger) Print(v ...interface{}) {
 	t.mu.Lock()
 	defer t.mu.Unlock()
 
-	if t.Level < LevelInfo || base.GetEnv() == "production" {
+	if t.Level < LevelInfo || config.GetEnv() == "production" {
 		return
 	}
 
@@ -139,7 +139,7 @@ func (t *Logger) Debugf(format string, v ...interface{}) {
 	t.mu.Lock()
 	defer t.mu.Unlock()
 
-	if t.Level < LevelDebug || base.GetEnv() == "production" {
+	if t.Level < LevelDebug || config.GetEnv() == "production" {
 		return
 	}
 
@@ -151,7 +151,7 @@ func (t *Logger) Logf(format string, v ...interface{}) {
 	t.mu.Lock()
 	defer t.mu.Unlock()
 
-	if t.Level < LevelInfo || base.GetEnv() == "production" {
+	if t.Level < LevelInfo || config.GetEnv() == "production" {
 		return
 	}
 	t.log(LevelInfo, true, fmt.Sprintf(format, v...))
@@ -162,7 +162,7 @@ func (t *Logger) Printf(format string, v ...interface{}) {
 	t.mu.Lock()
 	defer t.mu.Unlock()
 
-	if t.Level < LevelInfo || base.GetEnv() == "production" {
+	if t.Level < LevelInfo || config.GetEnv() == "production" {
 		return
 	}
 

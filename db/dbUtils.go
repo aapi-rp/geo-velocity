@@ -2,7 +2,7 @@ package db
 
 import (
 	"database/sql"
-	base "github.com/aapi-rp/geo-velocity/config"
+	"github.com/aapi-rp/geo-velocity/config"
 	"github.com/aapi-rp/geo-velocity/logger"
 	"github.com/aapi-rp/geo-velocity/model_struct"
 	_ "github.com/mattn/go-sqlite3"
@@ -12,7 +12,7 @@ var SqliteConn *sql.DB
 
 func InitData() (*sql.DB, error) {
 
-	DbConn, err := sql.Open("sqlite3", base.DBPath())
+	DbConn, err := sql.Open("sqlite3", config.DBPath())
 	DbConn.SetMaxOpenConns(1)
 	if err != nil {
 		return nil, err
@@ -39,7 +39,7 @@ func InitData() (*sql.DB, error) {
 
 func InsertDBRow(query string, values ...interface{}) error {
 
-	DbConn, err := sql.Open("sqlite3", base.DBPath())
+	DbConn, err := sql.Open("sqlite3", config.DBPath())
 	DbConn.SetMaxOpenConns(1)
 	if err != nil {
 		return err
@@ -68,7 +68,7 @@ func InsertDBRow(query string, values ...interface{}) error {
 
 func SelectDBRowExists(query string, args ...interface{}) (bool, error) {
 
-	DbConn, err := sql.Open("sqlite3", base.DBPath())
+	DbConn, err := sql.Open("sqlite3", config.DBPath())
 	DbConn.SetMaxOpenConns(1)
 
 	if err != nil {
@@ -98,7 +98,7 @@ func SelectDBRows(query string, currentIPAddr string, currentUser string, args .
 
 	subGeoData := model_struct.GeoData{}
 	hasrows := false
-	DbConn, err := sql.Open("sqlite3", base.DBPath())
+	DbConn, err := sql.Open("sqlite3", config.DBPath())
 	DbConn.SetMaxOpenConns(1)
 
 	if err != nil {

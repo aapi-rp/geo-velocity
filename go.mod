@@ -1,6 +1,6 @@
 module github.com/aapi-rp/geo-velocity
 
-go 1.13.6
+go 1.13.8
 
 require (
 	github.com/gorilla/mux v1.7.4

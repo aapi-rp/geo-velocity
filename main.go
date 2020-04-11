@@ -2,7 +2,7 @@ package main
 
 import (
 	"crypto/tls"
-	base "github.com/aapi-rp/geo-velocity/config"
+	"github.com/aapi-rp/geo-velocity/config"
 	"github.com/aapi-rp/geo-velocity/db"
 	"github.com/aapi-rp/geo-velocity/location_api"
 	"github.com/aapi-rp/geo-velocity/logger"
@@ -25,7 +25,7 @@ func main() {
 		logger.Warn("If table already exists, this warning can most likely be ignored: ", dberr)
 	}
 
-	if strings.ToLower(base.SkipSSLVerify()) == "true" {
+	if strings.ToLower(config.SkipSSLVerify()) == "true" {
 		http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 	}
 
@@ -46,11 +46,11 @@ func main() {
 		},
 	}
 
-	logger.Log("Starting Web Server over port: ", base.ServerPort())
+	logger.Log("Starting Web Server over port: ", config.ServerPort())
 
-	if strings.ToLower(base.EnableSSL()) == "true" {
+	if strings.ToLower(config.EnableSSL()) == "true" {
 		srv := &http.Server{
-			Addr:         ":" + base.ServerPort(),
+			Addr:         ":" + config.ServerPort(),
 			Handler:      router,
 			ReadTimeout:  readTimeout,
 			WriteTimeout: writeTimeout,
@@ -62,7 +62,7 @@ func main() {
 		log.Fatal(srv.ListenAndServeTLS("cert.pem", "key.pem"))
 	} else {
 		srv := &http.Server{
-			Addr:         ":" + base.ServerPort(),
+			Addr:         ":" + config.ServerPort(),
 			Handler:      router,
 			ReadTimeout:  readTimeout,
 			WriteTimeout: writeTimeout,

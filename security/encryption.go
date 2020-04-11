@@ -7,7 +7,7 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
-	base "github.com/aapi-rp/geo-velocity/config"
+	"github.com/aapi-rp/geo-velocity/config"
 	"github.com/aapi-rp/geo-velocity/logger"
 	"io"
 	"log"
@@ -18,7 +18,7 @@ import (
 // https://golang.org/pkg/crypto/ is another site i looked at for understanding
 
 func Encrypt(text string) string {
-	key, _ := hex.DecodeString(base.EncKey256())
+	key, _ := hex.DecodeString(config.EncKey256())
 	plaintext := []byte(text)
 
 	block, err := aes.NewCipher(key)
@@ -26,7 +26,7 @@ func Encrypt(text string) string {
 		logger.Error("Error generating block: ", err)
 	}
 
-	byteData := []byte(base.EncIV())
+	byteData := []byte(config.EncIV())
 	var r io.Reader
 	r = bytes.NewReader(byteData)
 	ciphertext := make([]byte, aes.BlockSize+len(plaintext))
@@ -43,7 +43,7 @@ func Encrypt(text string) string {
 
 func Decrypt(cryptoText string) (string, bool) {
 	ciphertext, _ := base64.URLEncoding.DecodeString(cryptoText)
-	key, _ := hex.DecodeString(base.EncKey256())
+	key, _ := hex.DecodeString(config.EncKey256())
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		log.Println(err)
