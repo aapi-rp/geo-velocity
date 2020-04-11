@@ -7,7 +7,7 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
-	"github.com/aapi-rp/geo-velocity/base"
+	base "github.com/aapi-rp/geo-velocity/config"
 	"github.com/aapi-rp/geo-velocity/logger"
 	"io"
 	"log"

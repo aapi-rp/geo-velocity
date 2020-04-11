@@ -2,7 +2,7 @@ package db
 
 import (
 	"database/sql"
-	"github.com/aapi-rp/geo-velocity/base"
+	base "github.com/aapi-rp/geo-velocity/config"
 	"github.com/aapi-rp/geo-velocity/logger"
 	"github.com/aapi-rp/geo-velocity/model_struct"
 	_ "github.com/mattn/go-sqlite3"

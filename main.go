@@ -2,7 +2,7 @@ package main
 
 import (
 	"crypto/tls"
-	"github.com/aapi-rp/geo-velocity/base"
+	base "github.com/aapi-rp/geo-velocity/config"
 	"github.com/aapi-rp/geo-velocity/db"
 	"github.com/aapi-rp/geo-velocity/location_api"
 	"github.com/aapi-rp/geo-velocity/logger"

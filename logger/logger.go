@@ -2,7 +2,7 @@ package logger
 
 import (
 	"fmt"
-	"github.com/aapi-rp/geo-velocity/base"
+	base "github.com/aapi-rp/geo-velocity/config"
 	"os"
 	"sync"
 )
