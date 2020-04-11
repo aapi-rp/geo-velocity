@@ -8,7 +8,7 @@ What is the purpose of this project?
 
 To provide an API that calculates geo events based on IP Address origin, and can decipher if the traffic is suspicious or valid, and return deciphered results to any application that needs to protect against malicious attacks based on geographic location, time and speed.
 
-##Docker
+## Docker
 #### Pull docker from dockerhub
 ```
 docker pull aapirp/geo-velocity:tagname
@@ -29,7 +29,7 @@ $ export server_port=8080
 $ export skip_ssl_verify
 ```
 
-####Build your own docker
+#### Build your own docker
 
 run the following:
 ```
@@ -38,7 +38,7 @@ $ cd to /yourbase/github.com/aapi-rp
 $ docker build geo-velocity
 ```
 
-##Install from source
+## Install from source
 run the following:
 ```
 $ git clone https://github.com/aapi-rp/geo-velocity.git
