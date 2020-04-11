@@ -1,4 +1,4 @@
-FROM golang:1.13.8
+FROM golang:1.13.8-alpine
 WORKDIR /go/src/github.com/aapi-rp/geo-velocity/
 
 COPY main.go .
@@ -6,9 +6,11 @@ COPY main.go .
 COPY go.mod .
 COPY go.sum .
 RUN go mod download
+RUN apk update  \
+       && apk add build-base \
+       && apk add g++
 
-
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main main.go
+RUN CGO_ENABLED=1 GOOS=linux go build -a -installsuffix cgo -o main main.go
 
 
 FROM alpine:latest

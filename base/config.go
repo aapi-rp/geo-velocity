@@ -3,7 +3,7 @@ package base
 import "os"
 
 const env = "development"
-const dbpath = "db/geo-velocity.sqlite3"
+const dbpath = "data/geo-velocity.sqlite3"
 const encIV = "28472B4B6250655368566D597133743677397A24432646294A404D635166546A"
 const encKey256 = "703273357638792F423F4528472B4B6250655368566D597133743677397A2443"
 const sslEnable = "false"

@@ -23,7 +23,7 @@ func GetGeoDataFromIP(ipaddr string) (model_struct.GeoData, error) {
 
 	Geo := model_struct.GeoData{}
 
-	db, err := geoip2.Open("db/GeoLite2-City.mmdb")
+	db, err := geoip2.Open("data/GeoLite2-City.mmdb")
 	if err != nil {
 		log.Println(err)
 		return Geo, err
