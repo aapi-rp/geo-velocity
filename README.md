@@ -24,7 +24,7 @@ $ docker run --publish 8081:8081 -e server_port=8081 --name geo aapirp/geo-veloc
 
 #### Environment Variables
 
-All settings below during testing are defaulted and do not need to be changed unless using in production mode. Keys should be added as kubernetes secrets in the GCP interface for security. [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/ "Kubernetes Secrets")
+All settings below during testing are defaulted and do not need to be changed unless using in production mode, or if you are already using port 8081. Keys should be added as kubernetes secrets in the GCP interface for security. [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/ "Kubernetes Secrets")
 
 Terminal Command to add env variables:
 ```
@@ -34,7 +34,9 @@ $ export encryption_key=256 hex key
 $ export encryption_iv=256 hex iv
 $ export enable_ssl=true
 $ export server_port=8080
-$ export skip_ssl_verify
+$ export skip_ssl_verify=false
+$ export server_host=localhost
+$ export server_scheme=https
 ```
 
 #### Build your own docker
