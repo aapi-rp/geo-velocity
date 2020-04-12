@@ -17,7 +17,7 @@ To provide an API that calculates geo events based on IP Address origin, and can
 
 ## Prerequisites
 
-* Docker 19.03.8, build afacb8b or later, I recommend Docker Desktop [Docker Desktop](https://www.docker.com/products/docker-desktop) if its not installed
+* Docker 19.03.8, build afacb8b or later, I recommend [Docker Desktop](https://www.docker.com/products/docker-desktop) if its not installed
 * Golang 1.13.8 - If manual install
 * An understanding of API's
 
