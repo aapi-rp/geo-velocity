@@ -15,6 +15,12 @@ What is the purpose of this project?
 
 To provide an API that calculates geo events based on IP Address origin, and can decipher if the traffic is suspicious or valid, and return deciphered results to any application that needs to protect against malicious attacks based on geographic location, time and speed.
 
+## Prerequisites
+
+* Docker 19.03.8, build afacb8b or later, I recommend Docker Desktop [Docker Desktop](https://www.docker.com/products/docker-desktop) if its not installed
+* Golang 1.13.8 - If manual install
+* An understanding of API's
+
 ## Docker
 #### Pull docker from dockerhub
 ```
@@ -52,7 +58,8 @@ $ docker build geo-velocity
 run the following:
 ```
 $ git clone https://github.com/aapi-rp/geo-velocity.git
-$ cd to /yourbase/github.com/aapi-rp
+$ cd to /yourbase/github.com/aapi-rp/geo-velocity
+$ go run main.go
 ```
 
 
