@@ -15,16 +15,22 @@ What is the purpose of this project?
 
 To provide an API that calculates geo events based on IP Address origin, and can decipher if the traffic is suspicious or valid, and return deciphered results to any application that needs to protect against malicious attacks based on geographic location, time and speed.
 
+## Prerequisites
+
+* Docker 19.03.8, build afacb8b or later, I recommend [Docker Desktop](https://www.docker.com/products/docker-desktop) if its not installed
+* Golang 1.13.8 - If manual install
+* An understanding of API's
+
 ## Docker
 #### Pull docker from dockerhub
 ```
-$ docker pull aapirp/geo-velocity:v1.1.5
-$ docker run --publish 8081:8081 -e server_port=8081 --name geo aapirp/geo-velocity:v1.1.5
+$ docker pull aapirp/geo-velocity:v1.1.7
+$ docker run --publish 8081:8081 -e server_port=8081 --name geo aapirp/geo-velocity:v1.1.7
 ```
 
 #### Environment Variables
 
-All settings below during testing are defaulted and do not need to be changed unless using in production mode. Keys should be added as kubernetes secrets in the GCP interface for security. [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/ "Kubernetes Secrets")
+All settings below during testing are defaulted and do not need to be changed unless using in production mode, or if you are already using port 8081. Keys should be added as kubernetes secrets in the GCP interface for security. [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/ "Kubernetes Secrets")
 
 Terminal Command to add env variables:
 ```
@@ -34,7 +40,9 @@ $ export encryption_key=256 hex key
 $ export encryption_iv=256 hex iv
 $ export enable_ssl=true
 $ export server_port=8080
-$ export skip_ssl_verify
+$ export skip_ssl_verify=false
+$ export server_host=localhost
+$ export server_scheme=https
 ```
 
 #### Build your own docker
@@ -50,7 +58,8 @@ $ docker build geo-velocity
 run the following:
 ```
 $ git clone https://github.com/aapi-rp/geo-velocity.git
-$ cd to /yourbase/github.com/aapi-rp
+$ cd to /yourbase/github.com/aapi-rp/geo-velocity
+$ go run main.go
 ```
 
 
