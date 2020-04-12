@@ -10,10 +10,13 @@ import (
 
 var SqliteConn *sql.DB
 
+/*
+   Method Description: Creates the initial database.
+*/
 func InitData() (*sql.DB, error) {
 
 	DbConn, err := sql.Open("sqlite3", config.DBPath()+"?cache=shared&mode=rwc")
-	DbConn.SetMaxOpenConns(1)
+
 	if err != nil {
 		return nil, err
 	}
@@ -37,6 +40,16 @@ func InitData() (*sql.DB, error) {
 	return DbConn, nil
 }
 
+/*
+    Method Description: Generic method to insert data into the events database, this keeps developers always pushing to the database
+    in the same way, sqlite is an interesting database, postgres or mysql would have been a better sampling of my database skills
+    we could have just used an inmem mysql and spun it up on the same docker auto.
+	Parameter: query
+    Parameter Description: The insert query you would like to submit
+	Parameter: values
+    Parameter Description: Standard values for the insert
+    Returns any error that may come from the database
+*/
 func InsertDBRow(query string, values ...interface{}) error {
 
 	DbConn, err := sql.Open("sqlite3", config.DBPath()+"?cache=shared&mode=rwc")
@@ -66,6 +79,14 @@ func InsertDBRow(query string, values ...interface{}) error {
 	return nil
 }
 
+/*
+    Method Description: Method to see if row exists
+	Parameter: query
+    Parameter Description: The insert query you would like to submit
+	Parameter: args
+    Parameter Description: Standard values for the query
+    Returns true or false if the row exists, or any error that may come from the database
+*/
 func SelectDBRowExists(query string, args ...interface{}) (bool, error) {
 
 	DbConn, err := sql.Open("sqlite3", config.DBPath()+"?cache=shared&mode=rwc")
@@ -93,6 +114,18 @@ func SelectDBRowExists(query string, args ...interface{}) (bool, error) {
 	return false, nil
 }
 
+/*
+    Method Description: Method to see if row exists
+	Parameter: query
+    Parameter Description: The insert query you would like to submit
+	Parameter: args
+    Parameter Description: Standard values for the query
+    Parameter: currentIPAddr
+    Parameter Description: ip for logging
+	Parameter: currentUser
+    Parameter Description: user for logging
+    Returns true or false if the row exists, geolocation data of the queried object and any error that may come from the database
+*/
 func SelectDBRows(query string, currentIPAddr string, currentUser string, args ...interface{}) (model_struct.GeoData, bool, error) {
 
 	subGeoData := model_struct.GeoData{}

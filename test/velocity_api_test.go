@@ -16,7 +16,10 @@ import (
 	"testing"
 )
 
-// This function will test the API for specific success and error responses.
+/*
+   Method Description: This function will test the API for specific success and error responses.
+*/
+
 func TestSuccessErrorResponses(t *testing.T) {
 
 	t.Log("Testing Success Status")
@@ -37,7 +40,9 @@ func TestSuccessErrorResponses(t *testing.T) {
 	}
 }
 
-// This function will dynamically test the example in the Challenge
+/*
+   Method Description: This function will dynamically test the example in the Challenge
+*/
 func TestResponseDataOldSchoolSecureWorks(t *testing.T) {
 
 	statUser := fmt.Sprintf("%s %s", randomdata.SillyName(), randomdata.SillyName())
@@ -79,10 +84,13 @@ func TestResponseDataOldSchoolSecureWorks(t *testing.T) {
 	}
 }
 
-// This testing harness allows for dynamic data on top of json, so you can send it json
-// and overwrite specific values of the request with dynamic data, or keep some
-// dynamic and some static its up to you how you want to use it, if I had more time
-// I would do some fun stuff this.
+/*
+   Method Description: This testing harness allows for dynamic data on top of json, so you can send it json
+   and overwrite specific values of the request with dynamic data, or keep some
+   dynamic and some static its up to you how you want to use it, if I had more time
+   I would do some fun stuff this.
+*/
+
 func geoAPICallHarness(jsone string, responseType string, staticUUID bool, staticUserName bool, staticUnix bool, usejsontimestamp bool, hrdCodedName string) string {
 	testDBdata := DBData{}
 	finalBody := ""

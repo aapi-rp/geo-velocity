@@ -11,6 +11,14 @@ const Err500MessageContentTypeJson = "Error, your request should be adjusted to 
 const Err400MessageUUID = "Error, UUID Exists"
 const Err400MessageTime = "Error, User event already exists with that timestamp"
 
+/*
+    Method Description: Creates a json message form text sent.
+	Parameter: message
+    Parameter Description: the message of the json
+    Parameter: status
+    Parameter Description: the http status of the message
+    Returns any error that may come from the database
+*/
 func CreateJsonMssage(message string, status string) ([]byte, error) {
 	webmessage := model_struct.WebMessage{}
 	webmessage.Status = status

@@ -8,6 +8,12 @@ import (
 	"github.com/aapi-rp/geo-velocity/utils"
 )
 
+/*
+    Method Description: Data request to add a geo event to the database.
+	Parameter: geo
+    Parameter Description: incoming api request data gets added to this struct
+    Returns any error that may come from the database
+*/
 func AddEvents(geo model_struct.GeoData) error {
 	err := db.InsertDBRow(db.InsertGVTable, geo.UUID, geo.LOGIN_TIME, geo.USERNAME, geo.IP_ADDRESS, geo.LAT, geo.LONG, geo.RADIUS)
 	if err != nil {
@@ -17,16 +23,36 @@ func AddEvents(geo model_struct.GeoData) error {
 	return nil
 }
 
+/*
+    Method Description: Validates if a specific event exists in the database that has the same unique id
+	Parameter: UUID
+    Parameter Description: unique id of the request
+    Returns true or false if the UUID exists, and returns an error if the database has an issue
+*/
 func EventExistsSameUUID(UUID []byte) (bool, error) {
 	uuidExists, err := db.SelectDBRowExists(db.UUIDExist, UUID)
 	return uuidExists, err
 }
 
+/*
+    Method Description: Validates if a specific username and timestamp combo already exists
+	Parameter: user, time
+    Parameter Description: user, the username of the request
+    Parameter Description: time, the unix timestamp of the request
+    Returns true or false if the user/time combo exists, and returns an error if the database has an issue
+*/
 func EventUserTimeComboExists(user string, time int64) (bool, error) {
 	userTimeExists, err := db.SelectDBRowExists(db.UserLoginTimeExists, time, user)
 	return userTimeExists, err
 }
 
+/*
+    Method Description: Validates if a specific username and timestamp combo already exists
+	Parameter: user, time
+    Parameter Description: user, the username of the request
+    Parameter Description: time, the unix timestamp of the request
+    This method returns the final response json back to the requester
+*/
 func GetPreviousSubsequentCompareJSON(current model_struct.GeoData) model_struct.VelocityJSON {
 
 	velocity := model_struct.VelocityJSON{}

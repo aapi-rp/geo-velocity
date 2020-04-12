@@ -13,9 +13,16 @@ import (
 	"log"
 )
 
-// Long ago I used multiple sources to put these encryption and decryption methods together.
-// Stack overflow mostly https://stackoverflow.com/questions/18817336/golang-encrypting-a-string-with-aes-and-base64
-// https://golang.org/pkg/crypto/ is another site i looked at for understanding
+/*
+    Long ago I used multiple sources to put these encryption and decryption methods together.
+    Stack overflow mostly https://stackoverflow.com/questions/18817336/golang-encrypting-a-string-with-aes-and-base64
+    https://golang.org/pkg/crypto/ is another site i looked at for understanding
+
+    Method Description: This method will encrypt any text sent to it
+	Parameter: text
+    Parameter Description: the plain text you would like to encrypt
+    Returns a AES encrypted string
+*/
 
 func Encrypt(text string) string {
 	key, _ := hex.DecodeString(config.EncKey256())
@@ -41,6 +48,12 @@ func Encrypt(text string) string {
 	return base64.URLEncoding.EncodeToString(ciphertext)
 }
 
+/*
+    Method Description: This method will decrypt any encrypted text that was encrypted with the same key and iv as this method uses for decryption
+	Parameter: cryptoText
+    Parameter Description: encrypted text
+    Returns a plain text string
+*/
 func Decrypt(cryptoText string) (string, bool) {
 	ciphertext, _ := base64.URLEncoding.DecodeString(cryptoText)
 	key, _ := hex.DecodeString(config.EncKey256())

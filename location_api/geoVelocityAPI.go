@@ -12,6 +12,11 @@ import (
 	"net/http"
 )
 
+/*
+   Method Description: http handler function that runs when the api endpoint is hit, this returns all the data to the requester for the geo velocity
+   Returns preceding and subsequent geo-velocity data along with threat alerts if the connection looks suspicious
+*/
+
 func EventData(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {

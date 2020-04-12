@@ -44,6 +44,8 @@ func EncKey256() string {
 	return val
 }
 
+// This should be added as a Kubernetes secret key header so its protected.
+// Default should not be used in production
 func EncIV() string {
 	val := os.Getenv("encryption_iv")
 

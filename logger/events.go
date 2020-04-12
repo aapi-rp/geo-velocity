@@ -1,3 +1,8 @@
+/*
+   This library was taken from https://github.com/ianberdin/l/blob/master/README.md when the repo was first opened
+   it suits my purpose, but I will most likely change it in the future.
+*/
+
 package logger
 
 // Subscribe on every log
