@@ -11,6 +11,11 @@ import (
 var SqliteConn *sql.DB
 
 /*
+   GENERAL NOTE: Closing the db connection did nothing so I did not add it, however in a production database I would close all these connections
+   and actually I would create a singleton with one connection and never close it as recommended in best practices.  sqlite is a strange database.
+*/
+
+/*
    Method Description: Creates the initial database.
 */
 func InitData() (*sql.DB, error) {
