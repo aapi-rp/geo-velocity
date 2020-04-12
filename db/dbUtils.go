@@ -12,7 +12,7 @@ var SqliteConn *sql.DB
 
 func InitData() (*sql.DB, error) {
 
-	DbConn, err := sql.Open("sqlite3", config.DBPath())
+	DbConn, err := sql.Open("sqlite3", config.DBPath()+"?cache=shared&mode=rwc")
 	DbConn.SetMaxOpenConns(1)
 	if err != nil {
 		return nil, err
@@ -39,8 +39,8 @@ func InitData() (*sql.DB, error) {
 
 func InsertDBRow(query string, values ...interface{}) error {
 
-	DbConn, err := sql.Open("sqlite3", config.DBPath())
-	DbConn.SetMaxOpenConns(1)
+	DbConn, err := sql.Open("sqlite3", config.DBPath()+"?cache=shared&mode=rwc")
+
 	if err != nil {
 		return err
 	}
@@ -68,8 +68,7 @@ func InsertDBRow(query string, values ...interface{}) error {
 
 func SelectDBRowExists(query string, args ...interface{}) (bool, error) {
 
-	DbConn, err := sql.Open("sqlite3", config.DBPath())
-	DbConn.SetMaxOpenConns(1)
+	DbConn, err := sql.Open("sqlite3", config.DBPath()+"?cache=shared&mode=rwc")
 
 	if err != nil {
 		return false, err
@@ -98,8 +97,7 @@ func SelectDBRows(query string, currentIPAddr string, currentUser string, args .
 
 	subGeoData := model_struct.GeoData{}
 	hasrows := false
-	DbConn, err := sql.Open("sqlite3", config.DBPath())
-	DbConn.SetMaxOpenConns(1)
+	DbConn, err := sql.Open("sqlite3", config.DBPath()+"?cache=shared&mode=rwc")
 
 	if err != nil {
 		return subGeoData, false, err

@@ -7,6 +7,7 @@ import (
 
 const Err500Message = "Error, Something went wrong with your request, please contact your administrator."
 const Err400Message = "Error, Malformed Request"
+const Err500MessageContentTypeJson = "Error, your request should be adjusted to add Content-Type header with mime application/json"
 const Err400MessageUUID = "Error, UUID Exists"
 const Err400MessageTime = "Error, User event already exists with that timestamp"
 

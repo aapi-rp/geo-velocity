@@ -6,6 +6,7 @@ import (
 	"github.com/aapi-rp/geo-velocity/db"
 	"github.com/aapi-rp/geo-velocity/location_api"
 	"github.com/aapi-rp/geo-velocity/logger"
+	"github.com/aapi-rp/geo-velocity/utils"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
@@ -46,7 +47,8 @@ func main() {
 		},
 	}
 
-	logger.Log("Starting Web Server over port: ", config.ServerPort())
+	logger.Log("Starting Web Server over port: ", config.ServerPort(), " with host: ", config.ServerHost(), "  you can change these values by adding environment variables with name server_port, and server_host")
+	logger.Log("The api is available over this url: ", utils.GetAPIUrl(), " this url is also for testing, so if its not configured right, the testing wont work")
 
 	if strings.ToLower(config.EnableSSL()) == "true" {
 		srv := &http.Server{

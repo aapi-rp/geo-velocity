@@ -1,22 +1,36 @@
 package utils
 
 import (
+	"fmt"
+	"github.com/aapi-rp/geo-velocity/config"
 	"github.com/aapi-rp/geo-velocity/model_struct"
 	"github.com/oschwald/geoip2-golang"
 	"log"
 	"math"
+	"math/rand"
 	"net"
 	"time"
 )
 
-func getCurrentEpochTime() time.Time {
+func GetCurrentEpochTime() int64 {
 	now := time.Now()
 	secs := now.Unix()
-	return time.Unix(secs, 0)
+	return secs
 }
 
-func GetAPIHost() {
+func RandomNum(min, max int) int {
+	rand.Seed(time.Now().Unix())
+	return rand.Intn(max-min) + min
+}
 
+func GetAPIUrl() string {
+	URL := ""
+	if config.ServerPort() == "80" || config.ServerPort() == "443" {
+		URL = fmt.Sprintf("%s://%s", config.ServerScheme(), config.ServerHost())
+	} else {
+		URL = fmt.Sprintf("%s://%s:%s", config.ServerScheme(), config.ServerHost(), config.ServerPort())
+	}
+	return URL
 }
 
 func GetGeoDataFromIP(ipaddr string) (model_struct.GeoData, error) {

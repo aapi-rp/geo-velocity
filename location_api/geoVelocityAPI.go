@@ -32,6 +32,16 @@ func EventData(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	contentType := r.Header.Get("Content-Type")
+
+	if contentType != "application/json" {
+		logger.Error("Error in request content type, should be mime application/json: ", err)
+		msg, _ := messages.CreateJsonMssage(messages.Err500MessageContentTypeJson, "500")
+		w.WriteHeader(500)
+		w.Write(msg)
+		return
+	}
+
 	geo, err := utils.GetGeoDataFromIP(er.IPAddress)
 
 	geo.USERNAME = er.Username
@@ -71,6 +81,7 @@ func EventData(w http.ResponseWriter, r *http.Request) {
 				logger.Error("Could not marshal struct data for velocity: ", err)
 			}
 
+			w.Header().Add("Content-Type", "application/json")
 			w.WriteHeader(200)
 			w.Write(returnJson)
 

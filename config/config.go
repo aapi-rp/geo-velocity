@@ -8,8 +8,9 @@ const encIV = "28472B4B6250655368566D597133743677397A24432646294A404D635166546A"
 const encKey256 = "703273357638792F423F4528472B4B6250655368566D597133743677397A2443"
 const sslEnable = "false"
 const serverPort = "8080"
+const serverHost = "localhost"
+const serverScheme = "http"
 const skipSSLVerify = "false"
-const host = "localhost"
 
 func GetEnv() string {
 	val := os.Getenv("env")
@@ -68,6 +69,26 @@ func ServerPort() string {
 
 	if val == "" {
 		val = serverPort
+	}
+
+	return val
+}
+
+func ServerHost() string {
+	val := os.Getenv("server_host")
+
+	if val == "" {
+		val = serverHost
+	}
+
+	return val
+}
+
+func ServerScheme() string {
+	val := os.Getenv("url_scheme")
+
+	if val == "" {
+		val = serverScheme
 	}
 
 	return val
