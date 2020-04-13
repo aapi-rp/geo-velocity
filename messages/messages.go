@@ -20,9 +20,9 @@ const Err400MessageTime = "Error, User event already exists with that timestamp"
     Returns any error that may come from the database
 */
 func CreateJsonMssage(message string, status string) ([]byte, error) {
-	webmessage := model_struct.WebMessage{}
-	webmessage.Status = status
-	webmessage.Message = message
-	jsonMessage, err := json.Marshal(webmessage)
+	webMessage := model_struct.WebMessage{}
+	webMessage.Status = status
+	webMessage.Message = message
+	jsonMessage, err := json.Marshal(webMessage)
 	return jsonMessage, err
 }

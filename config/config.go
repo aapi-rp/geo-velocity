@@ -3,7 +3,7 @@ package config
 import "os"
 
 const env = "development"
-const dbpath = "data/geo-velocity.sqlite3"
+const dbPath = "data/geo-velocity.sqlite3"
 const encIV = "28472B4B6250655368566D597133743677397A24432646294A404D635166546A"
 const encKey256 = "703273357638792F423F4528472B4B6250655368566D597133743677397A2443"
 const sslEnable = "false"
@@ -26,7 +26,7 @@ func DBPath() string {
 	val := os.Getenv("sqlite3_db_path")
 
 	if val == "" {
-		val = dbpath
+		val = dbPath
 	}
 
 	return val

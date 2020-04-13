@@ -20,13 +20,13 @@ var SqliteConn *sql.DB
 */
 func InitData() (*sql.DB, error) {
 
-	DbConn, err := sql.Open("sqlite3", config.DBPath()+"?cache=shared&mode=rwc")
+	dbConn, err := sql.Open("sqlite3", config.DBPath()+"?cache=shared&mode=rwc")
 
 	if err != nil {
 		return nil, err
 	}
 
-	ct, err := DbConn.Prepare(createGVTable)
+	ct, err := dbConn.Prepare(createGVTable)
 
 	if err != nil {
 		return nil, err
@@ -34,15 +34,15 @@ func InitData() (*sql.DB, error) {
 
 	ct.Exec()
 
-	err = DbConn.Ping()
+	err = dbConn.Ping()
 
 	if err != nil {
 		return nil, err
 	}
 
-	SqliteConn = DbConn
+	SqliteConn = dbConn
 
-	return DbConn, nil
+	return dbConn, nil
 }
 
 /*
@@ -57,19 +57,19 @@ func InitData() (*sql.DB, error) {
 */
 func InsertDBRow(query string, values ...interface{}) error {
 
-	DbConn, err := sql.Open("sqlite3", config.DBPath()+"?cache=shared&mode=rwc")
+	dbConn, err := sql.Open("sqlite3", config.DBPath()+"?cache=shared&mode=rwc")
 
 	if err != nil {
 		return err
 	}
 
-	err = DbConn.Ping()
+	err = dbConn.Ping()
 
 	if err != nil {
 		return err
 	}
 
-	insert, err := DbConn.Prepare(query)
+	insert, err := dbConn.Prepare(query)
 
 	if err != nil {
 		return err
@@ -94,19 +94,19 @@ func InsertDBRow(query string, values ...interface{}) error {
 */
 func SelectDBRowExists(query string, args ...interface{}) (bool, error) {
 
-	DbConn, err := sql.Open("sqlite3", config.DBPath()+"?cache=shared&mode=rwc")
+	dbConn, err := sql.Open("sqlite3", config.DBPath()+"?cache=shared&mode=rwc")
 
 	if err != nil {
 		return false, err
 	}
 
-	err = DbConn.Ping()
+	err = dbConn.Ping()
 
 	if err != nil {
 		return false, err
 	}
 
-	rows, err := DbConn.Query(query, args...)
+	rows, err := dbConn.Query(query, args...)
 
 	if rows.Next() {
 		return true, nil
@@ -135,19 +135,19 @@ func SelectDBRows(query string, currentIPAddr string, currentUser string, args .
 
 	subGeoData := model_struct.GeoData{}
 	hasrows := false
-	DbConn, err := sql.Open("sqlite3", config.DBPath()+"?cache=shared&mode=rwc")
+	dbConn, err := sql.Open("sqlite3", config.DBPath()+"?cache=shared&mode=rwc")
 
 	if err != nil {
 		return subGeoData, false, err
 	}
 
-	err = DbConn.Ping()
+	err = dbConn.Ping()
 
 	if err != nil {
 		return subGeoData, false, err
 	}
 
-	subRows, err := DbConn.Query(query, args...)
+	subRows, err := dbConn.Query(query, args...)
 
 	for subRows.Next() {
 		err = subRows.Scan(&subGeoData.IP_ADDRESS, &subGeoData.LAT, &subGeoData.LONG, &subGeoData.RADIUS, &subGeoData.LOGIN_TIME)

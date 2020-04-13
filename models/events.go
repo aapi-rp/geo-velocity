@@ -64,8 +64,8 @@ func GetPreviousSubsequentCompareJSON(current model_struct.GeoData) model_struct
 	}
 
 	if hasPrevious {
-		vdist := utils.VariableDistance(prevGeoData.LAT, prevGeoData.LONG, current.LAT, current.LONG, "miles")
-		mph := utils.MPH(vdist, prevGeoData.LOGIN_TIME, current.LOGIN_TIME)
+		vDist := utils.VariableDistance(prevGeoData.LAT, prevGeoData.LONG, current.LAT, current.LONG, "miles")
+		mph := utils.MPH(vDist, prevGeoData.LOGIN_TIME, current.LOGIN_TIME)
 		decryptedIP, _ := security.Decrypt(prevGeoData.IP_ADDRESS)
 		velocity.PrecedingIPAccess.IP = decryptedIP
 		velocity.PrecedingIPAccess.Lat = prevGeoData.LAT
@@ -88,8 +88,8 @@ func GetPreviousSubsequentCompareJSON(current model_struct.GeoData) model_struct
 	}
 
 	if hasSubsequent {
-		vdist := utils.VariableDistance(subGeoData.LAT, subGeoData.LONG, current.LAT, current.LONG, "miles")
-		mph := utils.MPH(vdist, current.LOGIN_TIME, subGeoData.LOGIN_TIME)
+		vDist := utils.VariableDistance(subGeoData.LAT, subGeoData.LONG, current.LAT, current.LONG, "miles")
+		mph := utils.MPH(vDist, current.LOGIN_TIME, subGeoData.LOGIN_TIME)
 		decryptedIP, _ := security.Decrypt(subGeoData.IP_ADDRESS)
 		velocity.SubsequentIPAccess.IP = decryptedIP
 		velocity.SubsequentIPAccess.Lat = subGeoData.LAT

@@ -111,8 +111,8 @@ func geoAPICallHarness(jsone string, responseType string, staticUUID bool, stati
 		randUser := fmt.Sprintf("%s %s", randomdata.SillyName(), randomdata.SillyName())
 
 		rTimeInt := utils.GetCurrentEpochTime()
-		furtherrTime := rTimeInt + int64(utils.RandomNum(-40000, 40000))
-		rTimeInt64 := int64(furtherrTime)
+		furtherTime := rTimeInt + int64(utils.RandomNum(-40000, 40000))
+		rTimeInt64 := int64(furtherTime)
 
 		if hrdCodedName != "" {
 			v.Username = hrdCodedName
@@ -144,9 +144,9 @@ func geoAPICallHarness(jsone string, responseType string, staticUUID bool, stati
 
 		endpoint := "/v1/geovelocity"
 		url := utils.GetAPIUrl() + endpoint
-		JsonStringData, _ := json.Marshal(v)
+		jsonStringData, _ := json.Marshal(v)
 
-		var jsonStr = JsonStringData
+		var jsonStr = jsonStringData
 		req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
 
 		req.Header.Set("Content-Type", "application/json")
