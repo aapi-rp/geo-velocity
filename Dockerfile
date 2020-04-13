@@ -46,7 +46,10 @@ COPY --from=0 /go/src/github.com/aapi-rp/geo-velocity/data data
 CMD ["./main"]
 
 
-
+EXPOSE 8080
+EXPOSE 80
+EXPOSE 8081
+EXPOSE 443
 
 
 
