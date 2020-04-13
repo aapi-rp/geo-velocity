@@ -76,20 +76,18 @@ POST
 
 #### Request Parameters
 
-| Name           | Example                              | Type | Required | Data Type |
-|----------------|--------------------------------------|------|----------|-----------|
-| username       | jim                                  | Form | yes      | string    |
-| unix_timestamp | 1586477927                           | Form | yes      | number    |
-| event_uuid     | 85ad929a-db03-4bf4-9541-8f728fa12e98 | Form | yes      | string    |
-| ip_address     | 65.49.22.66                          | Form | yes      | striing   |
+| Name           | Example                              | Required | Data Type |
+|----------------|--------------------------------------|----------|-----------|
+| username       | jim                                  | yes      | string    |
+| unix_timestamp | 1586477927                           | yes      | number    |
+| event_uuid     | 85ad929a-db03-4bf4-9541-8f728fa12e98 | yes      | string    |
+| ip_address     | 65.49.22.66                          | yes      | striing   |
 
 
 #### Example Request:
 
 ```
-$ curl -X POST -d '{"username": "jim",
-"unix_timestamp": 1586477927,
-"event_uuid": "85ad929a-db03-4bf4-9541-8f728fa12e98", "ip_address": "65.49.22.66"}' http://localhost:8080/v1/geovelocity
+$ curl --location --request POST 'localhost:8081/v1/geovelocity' --header 'Content-Type: application/json' --data-raw '{ "username": "jim", "unix_timestamp": 1586477934, "event_uuid": "85ad929a-db03-4bf4-9541-8f728fa12e934","ip_address": "65.49.22.66"}'
 ```
 
 #### Example Response:
