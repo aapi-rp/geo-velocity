@@ -74,7 +74,7 @@ application/json
 POST
 `
 
-#### Request Parameters
+#### Request JSON Parameters
 
 | Name           | Example                              | Required | Data Type |
 |----------------|--------------------------------------|----------|-----------|
