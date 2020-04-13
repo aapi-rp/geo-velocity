@@ -62,6 +62,34 @@ $ cd to /yourbase/github.com/aapi-rp/geo-velocity
 $ go run main.go
 ```
 
+## Testing
+
+```
+$ cd test
+$ go test -v
+```
+
+Example testing output:
+
+```
+=== RUN   TestSuccessErrorResponses
+--- PASS: TestSuccessErrorResponses (0.01s)
+    velocity_api_test.go:25: Testing Success Status
+    velocity_api_test.go:32: Testing UniqueID 400 Error
+    velocity_api_test.go:37: Testing same timestamp 400 Error
+=== RUN   TestResponseDataOldSchoolSecureWorks
+--- PASS: TestResponseDataOldSchoolSecureWorks (0.01s)
+    velocity_api_test.go:51: Testing geo data first entry no data
+    velocity_api_test.go:58: Testing geo data second entry with only preceding data
+    velocity_api_test.go:65: Testing geo data third entry with both preceding and subsequent data
+    velocity_api_test.go:72: Challenge old school response is:  {"currentGeo":{"lat":38.9206,"lon":-76.8787,"radius":50},"precedingIpAccess":{"ip":"24.242.71.20","lat":30.3773,"lon":-97.71,"radius":5,"speed":55,"timestamp":1514678400},"subsequentIpAccess":{"ip":"91.207.175.104","lat":34.0549,"lon":-118.2578,"radius":200,"speed":96,"timestamp":1514851200},"travelFromCurrentGeoSuspicious":false,"travelToCurrentGeoSuspicious":false}
+    velocity_api_test.go:74: Testing geo data forth entry with no data
+    velocity_api_test.go:77: Testing geo data fith entry with subsequent data and suspicious activity
+    velocity_api_test.go:80: Subsequent result with Suspicious activity:  {"currentGeo":{"lat":37.751,"lon":-97.822,"radius":1000},"precedingIpAccess":{},"subsequentIpAccess":{"ip":"70.162.226.163","lat":33.491,"lon":-112.2491,"radius":10,"speed":1657,"timestamp":1586658993},"travelFromCurrentGeoSuspicious":true,"travelToCurrentGeoSuspicious":false}
+PASS
+ok  	github.com/aapi-rp/geo-velocity/test	0.232s
+```
+
 
 ## Geo Velocity API
 
