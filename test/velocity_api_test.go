@@ -74,7 +74,7 @@ func TestResponseDataOldSchoolSecureWorks(t *testing.T) {
 	t.Log("Testing geo data forth entry with no data")
 	_ = geoAPICallHarness(subSequent1, "body", false, true, true, true, subUser)
 
-	t.Log("Testing geo data fith entry with subsequent data and suspicious activity")
+	t.Log("Testing geo data fifth entry with subsequent data and suspicious activity")
 	body5 := geoAPICallHarness(subSequent2, "body", false, true, true, true, subUser)
 
 	t.Log("Subsequent result with Suspicious activity: ", body5)
